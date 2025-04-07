@@ -1,0 +1,9 @@
+servers:
+  - host: '3.227.232.252'
+    port: '22'
+    user: 'admin'
+    proxy: 'socks5'
+  - host: 'frank1.hostcraft.top'
+    port: '22'
+    user: 'root'
+    proxy: 'socks5'
