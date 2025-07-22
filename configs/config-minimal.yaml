@@ -1,0 +1,20 @@
+version: "1.0"
+
+# Simple SSH tunnel configuration
+servers:
+  - name: "my-server"
+    host: "your-server.com"
+    port: "22"
+    user: "root"
+    password: "your-password"
+    transport: "ssh"
+    proxy: "socks5"
+    local_port: 8080
+    enabled: true
+
+# Basic settings
+auto_select: true
+monitoring:
+  enabled: false
+api:
+  enabled: false 

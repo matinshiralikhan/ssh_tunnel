@@ -1,0 +1,68 @@
+# SSH Tunnel Manager Configuration
+# Auto-generated for utah.mobland.top with V2Ray support
+version: "1.0"
+
+# Security configuration
+security:
+  enable_tls: false
+  enable_auth: true
+  auth_tokens:
+    - "utah-server-token-123"
+
+# Servers configuration
+servers:
+  - name: "utah-ssh"
+    host: "utah.mobland.top"
+    port: "22"
+    user: "root"
+    password: "boozbooz50"
+    transport: "ssh"
+    proxy: "socks5"
+    local_port: 8080
+    priority: 1
+    enabled: true
+    region: "us"
+    tags: ["utah", "ssh", "primary"]
+    timeout: 10s
+    max_retries: 3
+
+  - name: "utah-v2ray"
+    host: "utah.mobland.top"
+    port: "8083"
+    user: "root"
+    transport: "v2ray"
+    proxy: "socks5"
+    local_port: 8081
+    priority: 2
+    enabled: true
+    region: "us"
+    tags: ["utah", "v2ray"]
+    timeout: 10s
+    max_retries: 3
+    v2ray:
+      uuid: "41f1327c-72b7-c258-d37d-e083cdf25783"
+      alterId: 0
+      security: "auto"
+      network: "tcp"
+
+# Auto-selection settings
+auto_select: true
+selection_method: "latency"
+latency_timeout: 5s
+
+# Failover settings
+enable_failover: true
+failover_timeout: 30s
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  check_interval: 30s
+  log_level: "info"
+
+# REST API configuration
+api:
+  enabled: true
+  host: "localhost"
+  port: 8888
+  enable_cors: true 

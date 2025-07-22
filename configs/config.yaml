@@ -1,0 +1,136 @@
+version: "1.0"
+
+# Security configuration
+security:
+  enable_tls: false
+  enable_auth: true
+  auth_tokens:
+    - "your-secure-token-here"
+    - "another-token-for-admin"
+  encrypt_config: false
+  master_password: ""
+  fake_tls: false
+  reality: false
+  reality_target: "www.google.com"
+  reality_server_name: "www.google.com"
+
+# Server configurations
+servers:
+  - name: "aws-us-east"
+    host: "3.227.232.252"
+    port: "22"
+    user: "admin"
+    password: "your-password"
+    transport: "ssh"
+    proxy: "socks5"
+    local_port: 8080
+    priority: 1
+    enabled: true
+    region: "us-east-1"
+    tags: ["aws", "production"]
+    timeout: 10s
+    max_retries: 3
+
+  - name: "server-hysteria"
+    host: "frank1.hostcraft.top"
+    port: "443"
+    transport: "hysteria"
+    proxy: "socks5"
+    local_port: 8081
+    priority: 2
+    enabled: false
+    region: "europe"
+    tags: ["hysteria", "bypass"]
+    timeout: 15s
+    max_retries: 3
+    hysteria:
+      protocol: "udp"
+      auth_string: "your-hysteria-auth"
+      bandwidth: "100mbps"
+      alpn: "h3"
+      obfs: "salamander"
+      obfs_password: "obfs-password"
+
+  - name: "v2ray-server"
+    host: "your-v2ray-server.com"
+    port: "443"
+    transport: "v2ray"
+    proxy: "socks5"
+    local_port: 8082
+    priority: 3
+    enabled: false
+    region: "asia"
+    tags: ["v2ray", "bypass", "secure"]
+    timeout: 10s
+    max_retries: 3
+    v2ray:
+      uuid: "your-uuid-here"
+      alter_id: 0
+      security: "auto"
+      network: "ws"
+      path: "/v2ray"
+      host: "your-v2ray-server.com"
+      tls: "tls"
+      headers:
+        Host: "your-v2ray-server.com"
+
+  - name: "wireguard-server"
+    host: "your-wg-server.com"
+    port: "51820"
+    transport: "wireguard"
+    proxy: "socks5"
+    local_port: 8083
+    priority: 4
+    enabled: false
+    region: "global"
+    tags: ["wireguard", "vpn"]
+    timeout: 10s
+    max_retries: 3
+    wireguard:
+      private_key: "your-private-key"
+      public_key: "server-public-key"
+      pre_shared_key: "pre-shared-key"
+      allowed_ips: ["0.0.0.0/0", "::/0"]
+      dns: ["1.1.1.1", "1.0.0.1"]
+      mtu: 1420
+
+# Routing rules
+routing:
+  - type: "domain"
+    pattern: "*.google.com"
+    action: "proxy"
+    server: "aws-us-east"
+  - type: "geoip"
+    geoip: ["CN", "IR", "RU"]
+    action: "proxy"
+    server: "server-hysteria"
+  - type: "ip"
+    ips: ["8.8.8.8", "8.8.4.4"]
+    action: "direct"
+
+# Auto-selection settings
+auto_select: true
+selection_method: "latency"  # Options: latency, load, random
+latency_timeout: 5s
+
+# Failover settings
+enable_failover: true
+failover_timeout: 30s
+
+# Monitoring configuration
+monitoring:
+  enabled: true
+  check_interval: 30s
+  health_endpoint: "/health"
+  metrics_endpoint: "/metrics"
+  log_level: "info"  # Options: debug, info, warn, error
+  log_file: "logs/ssh-tunnel.log"
+  max_log_size: "100MB"
+
+# REST API configuration
+api:
+  enabled: true
+  host: "localhost"
+  port: 8888
+  enable_cors: true
+  rate_limit: 100  # requests per minute 

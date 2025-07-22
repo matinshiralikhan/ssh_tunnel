@@ -1,0 +1,58 @@
+# Combined Multi-Protocol Configuration
+# Generated automatically by SSH Tunnel Manager
+
+version: "1.0"
+
+# Server Information
+server:
+  host: utah.mobland.top
+  port: 22
+  user: root
+  os: Linux
+  architecture: x86_64
+
+# Available Protocols
+servers:
+  - name: "auto-ssh"
+    host: "utah.mobland.top"
+    port: "8080"
+    transport: "ssh"
+    proxy: "socks5"
+    local_port: 9080
+    enabled: true
+    priority: 22
+    proxy_url: "socks5://127.0.0.1:8080"
+
+  - name: "auto-v2ray"
+    host: "utah.mobland.top"
+    port: "8083"
+    transport: "v2ray"
+    proxy: "socks5"
+    local_port: 9083
+    enabled: true
+    priority: 32
+
+  - name: "auto-http_proxy"
+    host: "utah.mobland.top"
+    port: "9081"
+    transport: "http_proxy"
+    proxy: "socks5"
+    local_port: 10081
+    enabled: true
+    priority: 41
+    proxy_url: "http://127.0.0.1:9081"
+
+  - name: "auto-socks5_proxy"
+    host: "utah.mobland.top"
+    port: "9082"
+    transport: "socks5_proxy"
+    proxy: "socks5"
+    local_port: 10082
+    enabled: true
+    priority: 51
+    proxy_url: "socks5://127.0.0.1:9082"
+
+# Quick Start URLs:
+# SSH: socks5://127.0.0.1:8080
+# HTTP_PROXY: http://127.0.0.1:9081
+# SOCKS5_PROXY: socks5://127.0.0.1:9082
