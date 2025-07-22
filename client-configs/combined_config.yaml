@@ -13,16 +13,6 @@ server:
 
 # Available Protocols
 servers:
-  - name: "auto-ssh"
-    host: "utah.mobland.top"
-    port: "8080"
-    transport: "ssh"
-    proxy: "socks5"
-    local_port: 9080
-    enabled: true
-    priority: 22
-    proxy_url: "socks5://127.0.0.1:8080"
-
   - name: "auto-v2ray"
     host: "utah.mobland.top"
     port: "8083"
@@ -30,7 +20,7 @@ servers:
     proxy: "socks5"
     local_port: 9083
     enabled: true
-    priority: 32
+    priority: 22
 
   - name: "auto-http_proxy"
     host: "utah.mobland.top"
@@ -39,7 +29,7 @@ servers:
     proxy: "socks5"
     local_port: 10081
     enabled: true
-    priority: 41
+    priority: 31
     proxy_url: "http://127.0.0.1:9081"
 
   - name: "auto-socks5_proxy"
@@ -49,8 +39,18 @@ servers:
     proxy: "socks5"
     local_port: 10082
     enabled: true
-    priority: 51
+    priority: 41
     proxy_url: "socks5://127.0.0.1:9082"
+
+  - name: "auto-ssh"
+    host: "utah.mobland.top"
+    port: "8080"
+    transport: "ssh"
+    proxy: "socks5"
+    local_port: 9080
+    enabled: true
+    priority: 51
+    proxy_url: "socks5://127.0.0.1:8080"
 
 # Quick Start URLs:
 # SSH: socks5://127.0.0.1:8080
